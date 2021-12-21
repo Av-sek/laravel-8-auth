@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TeacherController;
+use PhpParser\Node\Scalar\MagicConst\Dir;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,4 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',function(){
     return view('welcome');
 });
+
+
+require __DIR__."/admin.php";
+require __DIR__."/teacher.php";
+require __DIR__."/student.php";
+
 

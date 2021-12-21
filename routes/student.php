@@ -18,5 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('student')->group(
     function(){
         Route::get('/login',[StudentController::class,'login']);
+        Route::get('/register',[StudentController::class,'register']);
     }
 );

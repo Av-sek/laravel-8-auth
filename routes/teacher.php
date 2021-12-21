@@ -3,20 +3,12 @@
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-Route::prefix('teacher')->group(
-    function(){
+Route::prefix('teacher')->group(function(){
         Route::get('/login',[TeacherController::class,'login']);
+        Route::get('/register',[TeacherController::class,'register']);
     }
 );
+Route::get("/teacher",function(){
+    ;
+});
+
