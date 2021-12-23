@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\PublicController;
 use PhpParser\Node\Scalar\MagicConst\Dir;
 
 /*
@@ -18,7 +19,10 @@ use PhpParser\Node\Scalar\MagicConst\Dir;
 
 Route::get('/',function(){
     return view('welcome');
-});
+})->name('/');
+
+Route::get('/login/{role}',[PublicController::class,'login'])->name('login');
+Route::get('/register/{role}',[PublicController::class,'register'])->name('register');
 
 
 require __DIR__."/admin.php";

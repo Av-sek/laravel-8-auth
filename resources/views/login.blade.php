@@ -13,16 +13,17 @@
 </head>
 
 <body>
-
-
-    <form class="form-horizontal" action='' method="POST">
+    <div>
+        @if (Session::has('success'))
+            <p>{{ Session::get('success') }}</p>
+        @endif
+    </div>
+    <form class="form-horizontal" action='{{ route($role.'.auth') }}' method="POST">
+        @csrf
         <fieldset>
             <div id="legend">
-                <legend class="">Admin Login</legend>
+                <legend class="">{{ ucFirst($role) }} Login</legend>
             </div>
-            @if (Session::has('success'))
-                <p>{{ Session::get('success') }}</p>
-            @endif
             <div class="control-group">
                 <!-- Username -->
                 <label class="control-label" for="username">Username</label>
@@ -30,6 +31,9 @@
                     <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
                     <p class="help-block">Enter your Username</p>
                 </div>
+                @error('username')
+                    {{ $message }}
+                @enderror
             </div>
 
             <div class="control-group">
@@ -39,6 +43,9 @@
                     <input type="text" id="email" name="email" placeholder="" class="input-xlarge">
                     <p class="help-block">Please provide your E-mail</p>
                 </div>
+                @error('email')
+                    {{ $message }}
+                @enderror
             </div>
 
             <div class="control-group">
@@ -48,6 +55,9 @@
                     <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
                     <p class="help-block">Password should be at least 6 characters</p>
                 </div>
+                @error('password')
+                    {{ $message }}
+                @enderror
             </div>
 
             <div class="control-group">

@@ -3,15 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
-    public function login()
+    public function __construct()
     {
-        return view('student.auth.login');
+        $this->middleware('auth:student');
     }
-    public function register()
+    public function dashboard()
     {
-        return view('student.auth.register');
+        return view('student.dashboard');
+    }
+    public function logout(Request $res)
+    {
+        Auth::guard('student')->logout();
+
+        $res->session()->invalidate();
+
+        $res->session()->regenerateToken();
+
+        return redirect('/login/student');
     }
 }

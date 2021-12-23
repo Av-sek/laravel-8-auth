@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\StudentController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('student')->group(
     function(){
-        Route::get('/login',[StudentController::class,'login']);
-        Route::get('/register',[StudentController::class,'register']);
+        Route::post('/login',[AuthController::class,'authStudent'])->name('student.auth');
+        Route::get('/register',[AuthController::class,'register'])->name('student.register');
+        Route::post('/create',[AuthController::class,'createStudent'])->name('student.create');
+        Route::get('/dashboard',[StudentController::class,'dashboard'])->name('student.dashboard');
+        Route::post('/logout',[StudentController::class,'logout'])->name('student.logout');
     }
 );

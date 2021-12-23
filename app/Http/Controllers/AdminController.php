@@ -4,37 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Middleware\CustomAuth;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function login()
+    public function __construct()
     {
-        return view('admin.auth.login');
-    }
-    public function register()
-    {
-        return view('admin.auth.register');
-    }
-    public function createAdmin(Request $res)
-    {
-        $res->validate(
-            [
-                'username'=>'required|max:25|unique:admins',
-                'email'=>'email|required|unique:admins',
-                'password'=>'required',
-                'password_confirm'=>'required_with:password|same:password'
-            ]
-            );
-        $admin = new Admin();
-        $admin->username = $res->username;
-        $admin->email = $res->email;
-        $admin->password = Hash::make($res->password);
-        $admin->save();
-        return redirect()->route('admin.login')->with('success','User Registered Successfully');
+        $this->middleware('auth:admin');
     }
     public function dashboard()
     {
-        
+        return view('admin.dashboard');
+    }
+    public function logout(Request $res)
+    {
+        Auth::guard('admin')->logout();
+
+        $res->session()->invalidate();
+
+        $res->session()->regenerateToken();
+
+        return redirect('/login/admin');
     }
 }
