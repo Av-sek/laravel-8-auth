@@ -12,9 +12,6 @@
     @if (Session::has('success'))
         <p>{{ Session::get('success') }}</p>
     @endif
-    <p>
-        {{ Session::get('admin') }}
-    </p>
     <h1>I am admin</h1>
     <a href="{{ route('admin.logout') }}"
         onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">

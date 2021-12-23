@@ -27,14 +27,10 @@ class AuthController extends Controller
         $admin->email = $res->email;
         $admin->password = Hash::make($res->password);
         $admin->save();
-        return redirect()->route('admin.dashboard')->with('success','User Registered Successfully');
+        return redirect()->route('login','admin')->with('success','User Registered Successfully');
     }
     public function authAdmin(Request $res)
     {
-        if(Auth::guard('admin')->check())
-        {
-            RedirectIfAuthenticated::class;
-        }
         $credentials = $res->validate([
             'username'=>'required',
             'email'=>'required|email',

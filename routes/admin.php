@@ -20,8 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->group(
     function(){
         Route::post('/login',[AuthController::class,'authAdmin'])->name('admin.auth');
-        Route::get('/register',[AdminController::class,'register'])->name('admin.register');
-        Route::post('/create',[AdminController::class,'createAdmin'])->name('admin.create');
+        Route::get('/register',[AuthController::class,'register'])->name('admin.register');
+        Route::post('/create',[AuthController::class,'createAdmin'])->name('admin.create');
         Route::get('/dashboard',[AdminController::class,'dashboard'])->name('admin.dashboard');
         Route::post('/logout',[AdminController::class,'logout'])->name('admin.logout');
     }
