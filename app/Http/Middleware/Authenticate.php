@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 

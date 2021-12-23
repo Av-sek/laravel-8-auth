@@ -31,6 +31,10 @@ class AuthController extends Controller
     }
     public function authAdmin(Request $res)
     {
+        if(Auth::guard('admin')->check())
+        {
+            RedirectIfAuthenticated::class;
+        }
         $credentials = $res->validate([
             'username'=>'required',
             'email'=>'required|email',

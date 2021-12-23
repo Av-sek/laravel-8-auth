@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Http\Middleware\CustomAuth;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -19,6 +20,7 @@ class AdminController extends Controller
     }
     public function logout(Request $res)
     {
+        
         Auth::guard('admin')->logout();
 
         $res->session()->invalidate();
