@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\AuthAdminController;
 use App\Http\Controllers\AdminController;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Route;
@@ -16,14 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::prefix('admin')->group(
+Route::redirect('/admin','/login/admin');
+Route::name('admin.')->prefix('admin')->group(
     function(){
-        Route::post('/login',[AuthController::class,'authAdmin'])->name('admin.auth');
-        Route::get('/register',[AuthController::class,'register'])->name('admin.register');
-        Route::post('/create',[AuthController::class,'createAdmin'])->name('admin.create');
-        Route::get('/dashboard',[AdminController::class,'dashboard'])->name('admin.dashboard');
-        Route::post('/logout',[AdminController::class,'logout'])->name('admin.logout');
+        Route::post('/login',[AuthAdminController::class,'authAdmin'])->name('auth');
+        Route::post('/create',[AuthAdminController::class,'createAdmin'])->name('create');
+        Route::get('/dashboard',[AdminController::class,'dashboard'])->name('dashboard');
+        Route::post('/logout',[AdminController::class,'logout'])->name('logout');
     }
 );
 
